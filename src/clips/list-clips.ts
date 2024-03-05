@@ -5,7 +5,7 @@ type Directory = {
   files: (Directory | string)[];
 }
 
-export async function GET() {
+export async function listClips() {
   const client = new S3Client({
     credentials: {
       accessKeyId: process.env.CLOUDFLARE_ACCESS_KEY_ID as string,
@@ -67,10 +67,9 @@ export async function GET() {
       command.input.ContinuationToken = NextContinuationToken;
     }
 
-    return new Response(JSON.stringify(directories, null, 2), {
-      headers: { "content-type": "application/json" },
-    });
+    return directories;
   } catch (err) {
     console.error(err);
+    return [];
   }
 }

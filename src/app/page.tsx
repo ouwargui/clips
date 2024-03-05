@@ -1,15 +1,11 @@
-type Directory = {
-  name: string;
-  files: (Directory | string)[];
-}
+import { listClips } from "@/clips/list-clips";
 
 export default async function Home() {
-  const response = await fetch('http://localhost:3000/api/list-objects');
-  const data = await response.json() as Directory[];
+  const clips = await listClips();
 
   return (
     <main>
-      {data.map((directory) => (
+      {clips.map((directory) => (
         <div key={directory.name} className="flex flex-col">
           <h2 className="text-4xl font-bold">{directory.name}</h2>
           <ul>
