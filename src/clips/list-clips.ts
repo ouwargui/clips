@@ -30,6 +30,7 @@ export async function listClips() {
         const directoryName = content.Key?.split('/')[0];
         const fileName = content.Key?.split('/')[1];
 
+        if (directoryName === 'Desktop') continue;
         if (directoryName === 'ssd') {
           const obj: Directory = {
             name: directoryName,
